@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    let userDefaults = UserDefaults.standard
     var pageMenu : CAPSPageMenu?
     
     var myLabel1 : UILabel?
@@ -19,17 +20,17 @@ class ViewController: UIViewController {
     var myLabel3 : UILabel?
     var myLabel32 : UILabel?
     
-    let array1 = ["服","眼鏡","家","食べ物","アプリ","アイディア","スマホ","夢","現在","過去","未来","怪獣","ヒーロー","ゲーム","パソコン","敵","母","父","海賊","学校","先生","山","海","川","砂漠","太陽","魚","犬","猫","鳥","子ども","大人","お金","男","女","理想","手","足","腰","本","一瞬","永遠","冒険","進化","写真","動画","友達","つぶやき","起業","車","電車","バス","宗教","解説","民族","恋愛",
+    var array1 = ["服","眼鏡","家","食べ物","アプリ","アイディア","スマホ","夢","現在","過去","未来","怪獣","ヒーロー","ゲーム","パソコン","敵","母","父","海賊","学校","先生","山","海","川","砂漠","太陽","魚","犬","猫","鳥","子ども","大人","お金","男","女","理想","手","足","腰","本","一瞬","永遠","冒険","進化","写真","動画","友達","つぶやき","起業","車","電車","バス","宗教","解説","民族","恋愛",
         "作る","食べる","飲む","投げる","蹴る","生きる","育てる","考える","動く","見る","聞く","感じる","倒す","寝る","起きる","笑う","歌う","立つ","座る","乗る","飛ぶ","沈む","読む",
         "大きい","小さい","きれい","汚い","面白い","つらい","はやい","遅い","明るい","暗い","からい","甘い","苦い","怖い","優しい"
     ]
-    let array2 = ["服","眼鏡","家","食べ物","アプリ","アイディア","スマホ","夢","現在","過去","未来","怪獣","ヒーロー","ゲーム","パソコン","敵","母","父","海賊","学校","先生","山","海","川","砂漠","太陽","雲","魚","犬","猫","鳥","子ども","大人","お金","男","女","理想","手","足","腰","本","一瞬","永遠","冒険","進化","写真","動画","友達","つぶやき","起業","車","電車","バス","宗教","解説","民族","恋愛",
+    var array2 = ["服","眼鏡","家","食べ物","アプリ","アイディア","スマホ","夢","現在","過去","未来","怪獣","ヒーロー","ゲーム","パソコン","敵","母","父","海賊","学校","先生","山","海","川","砂漠","太陽","雲","魚","犬","猫","鳥","子ども","大人","お金","男","女","理想","手","足","腰","本","一瞬","永遠","冒険","進化","写真","動画","友達","つぶやき","起業","車","電車","バス","宗教","解説","民族","恋愛",
         "作る","食べる","飲む","投げる","蹴る","生きる","育てる","考える","動く","見る","聞く","感じる","倒す","寝る","起きる","笑う","歌う","立つ","座る","乗る","飛ぶ","沈む","読む",
         "大きい","小さい","きれい","汚い","面白い","つらい","はやい","遅い","明るい","暗い","からい","甘い","苦い","怖い","優しい",
     ]
-    let array3 = ["初めての","三回目の","面白い","最悪の","最高の","理想の","最近の","夏の","冬の"]
+    var array3 = ["初めての","三回目の","面白い","最悪の","最高の","理想の","最近の","夏の","冬の"]
     
-    let array4 = ["恋","武勇伝","買い物","喧嘩","キス","旅","世間話","プロポーズ","友達","出逢い","先生","あるある"]
+    var array4 = ["恋","武勇伝","買い物","喧嘩","キス","旅","世間話","プロポーズ","友達","出逢い","先生","あるある"]
     
     override var shouldAutorotate : Bool {
         return false
@@ -38,6 +39,29 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        if (userDefaults.object(forKey: "array1")) == nil {
+            userDefaults.set(array1, forKey: "array1")
+        } else {
+            array1 = userDefaults.object(forKey: "array1") as! [String]
+        }
+        if (userDefaults.object(forKey: "array2")) == nil {
+            userDefaults.set(array2, forKey: "array2")
+        } else {
+            array2 = userDefaults.object(forKey: "array2") as! [String]
+        }
+        if (userDefaults.object(forKey: "array3")) == nil {
+            userDefaults.set(array3, forKey: "array3")
+        } else {
+            array3 = userDefaults.object(forKey: "array3") as! [String]
+        }
+        if (userDefaults.object(forKey: "array4")) == nil {
+            userDefaults.set(array4, forKey: "array4")
+        } else {
+            array4 = userDefaults.object(forKey: "array4") as! [String]
+        }
+        
+        
         
         // Array to keep track of controllers in page menu
         var controllerArray : [UIViewController] = []
