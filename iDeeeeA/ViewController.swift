@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     var myLabel22 : UILabel?
     var myLabel3 : UILabel?
     var myLabel32 : UILabel?
+    var textField = UITextField()
     
     var array1 = ["服","眼鏡","家","食べ物","アプリ","アイディア","スマホ","夢","現在","過去","未来","怪獣","ヒーロー","ゲーム","パソコン","敵","母","父","海賊","学校","先生","山","海","川","砂漠","太陽","魚","犬","猫","鳥","子ども","大人","お金","男","女","理想","手","足","腰","本","一瞬","永遠","冒険","進化","写真","動画","友達","つぶやき","起業","車","電車","バス","宗教","解説","民族","恋愛",
         "作る","食べる","飲む","投げる","蹴る","生きる","育てる","考える","動く","見る","聞く","感じる","倒す","寝る","起きる","笑う","歌う","立つ","座る","乗る","飛ぶ","沈む","読む",
@@ -278,7 +279,17 @@ class ViewController: UIViewController {
         myLabel32!.font = UIFont.systemFont(ofSize: 30)
         controller3.view.addSubview(myLabel32!)
         
+        textField.frame = CGRect(x: 60,y: self.view.bounds.height-150, width: 200, height: 30)
+        textField.backgroundColor = UIColor.white
+        textField.delegate = controller1
+        controller1.view.addSubview(textField)
         
+        let addBtn = UIButton()
+        addBtn.frame = CGRect(x: self.view.bounds.width-150,y: self.view.bounds.height-100,width: 50,height: 30)
+        addBtn.setTitle("追加", for: .normal)
+        addBtn.backgroundColor = UIColor.init(white: 0.5, alpha: 0.5)
+        addBtn.tag = 121
+        controller1.view.addSubview(addBtn)
         
         // ラベル作成
         let myLabel: UILabel = UILabel()
@@ -348,6 +359,18 @@ class ViewController: UIViewController {
             
             break
             
+        case 121:
+            array1.append(textField.text!)
+            userDefaults.set(array1, forKey: "array1")
+            let alert = UIAlertController(title: "成功", message: "保存しました", preferredStyle: UIAlertControllerStyle.alert)
+            let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:{
+                // ボタンが押された時の処理を書く（クロージャ実装）
+                (action: UIAlertAction!) -> Void in
+                print("OK")
+            })
+            alert.addAction(defaultAction)
+            present(alert, animated: true, completion: nil)
+            
         default:
             
             
@@ -360,7 +383,13 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+}
+
+extension UIViewController: UITextFieldDelegate {
     
-    
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
 
