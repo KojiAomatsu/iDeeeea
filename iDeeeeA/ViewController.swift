@@ -320,7 +320,7 @@ class ViewController: UIViewController {
         
     }
     
-    func tapped(_ sender : UIButton) {
+    @objc func tapped(_ sender : UIButton) {
         
         switch sender.tag {
         
